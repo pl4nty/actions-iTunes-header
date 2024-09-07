@@ -132,6 +132,23 @@ def initITunes():
     print("Waiting login result...")
     time.sleep(10)
     debugTopWin()
+
+    topwin = app.top_window()
+    if 'only valid for purchases in' in topwin.window_text():
+        print("Clicking ok for country dialog")
+        loginButton = topwin.Button1
+        loginButton.wait('ready')
+        loginButton.click()
+        time.sleep(0.5)
+        try:
+            loginButton.click()
+            time.sleep(0.5)
+            loginButton.click_input()
+        except:
+            pass
+
+    time.sleep(5)
+    debugTopWin()
     
     if app.top_window().handle == dialogWrap.handle:
         raise Exception("Failed to trigger Login button!")
