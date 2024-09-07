@@ -131,7 +131,61 @@ def initITunes():
 
     print("Waiting login result...")
     time.sleep(10)
-    cleanAllDialog()
+    debugTopWin()
+
+    dialog = app.top_window()
+    dialogWrap = dialog.wait('ready')
+    
+    loginButton = dialog.Button0
+    loginButton.wait('ready')
+    # click multiple times as pywinauto seems to have some bug
+    loginButton.click()
+    time.sleep(0.5)
+    try:
+        loginButton.click()
+        time.sleep(0.5)
+        loginButton.click_input()
+    except:
+        pass
+
+    loginButton = dialog.Button1
+    loginButton.wait('ready')
+    # click multiple times as pywinauto seems to have some bug
+    loginButton.click()
+    time.sleep(0.5)
+    try:
+        loginButton.click()
+        time.sleep(0.5)
+        loginButton.click_input()
+    except:
+        pass
+
+    loginButton = dialog.Button2
+    loginButton.wait('ready')
+    # click multiple times as pywinauto seems to have some bug
+    loginButton.click()
+    time.sleep(0.5)
+    try:
+        loginButton.click()
+        time.sleep(0.5)
+        loginButton.click_input()
+    except:
+        pass
+
+    if 'only valid for purchases in' in topwin.window_text():
+        print("Clicking ok for country dialog")
+        loginButton = topwin.Button1
+        loginButton.wait('ready')
+        loginButton.click()
+        time.sleep(0.5)
+        try:
+            loginButton.click()
+            time.sleep(0.5)
+            loginButton.click_input()
+        except:
+            pass
+
+    time.sleep(5)
     debugTopWin()
     
     if app.top_window().handle == dialogWrap.handle:
